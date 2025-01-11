@@ -224,10 +224,7 @@ exports.formatDate = (date) => {
 };
 ```
 
-![picture 26](https://cdn.jsdelivr.net/gh/jovick-coder/jovick-blog@main/A%20Beginner's%20Guide%20to%20Node.js%20Folder%20Structure%20Simplify%20Your%20Backend/image/1736638329621_12_01_2025.png)  
-
-![picture 27](https://cdn.jsdelivr.net/gh/jovick-coder/jovick-blog@main/A%20Beginner's%20Guide%20to%20Node.js%20Folder%20Structure%20Simplify%20Your%20Backend/image/1736638474139_12_01_2025.png)  
-
+![picture 28](https://cdn.jsdelivr.net/gh/jovick-coder/jovick-blog@main/A%20Beginner's%20Guide%20to%20Node.js%20Folder%20Structure%20Simplify%20Your%20Backend/images/1736638673489_12_01_2025.png)  
 
 
 1. config/

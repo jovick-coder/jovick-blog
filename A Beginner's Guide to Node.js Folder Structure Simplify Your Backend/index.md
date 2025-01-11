@@ -224,14 +224,11 @@ exports.formatDate = (date) => {
 };
 ```
 
-![picture 0](https://cdn.jsdelivr.net/gh/jovick-coder/jovick-blog@main/images/4f487ad506c15cfa8beebefbc694682a687e10258eeab1a938d3bcb8e71833f2-1736631790588.png)  
+![picture 26](https://cdn.jsdelivr.net/gh/jovick-coder/jovick-blog@main/A%20Beginner's%20Guide%20to%20Node.js%20Folder%20Structure%20Simplify%20Your%20Backend/image/1736638329621_12_01_2025.png)  
 
-![alt text](fc89df68-150b-462c-9436-de51ca4b6bed.webp)
-
-![picture 1](https://cdn.jsdelivr.net/gh/jovick-coder/jovick-blog@main/images/1736632544481_11_01_2025.png)
+![picture 27](https://cdn.jsdelivr.net/gh/jovick-coder/jovick-blog@main/A%20Beginner's%20Guide%20to%20Node.js%20Folder%20Structure%20Simplify%20Your%20Backend/image/1736638474139_12_01_2025.png)  
 
 
-![picture 2](https://raw.githubusercontent.com/jovick-coder/jovick-blog/main/images/images/1736632771119_11_01_2025.png)  
 
 1. config/
 What it is:

@@ -13,17 +13,30 @@ Description: "Learn how to organize your Node.js backend with this beginner-frie
 - [Mastering Backend Node.js Folder Structure: A Beginner’s Guide](#mastering-backend-nodejs-folder-structure-a-beginners-guide)
   - [Table of Contents](#table-of-contents)
   - [Introduction](#introduction)
-  - [A Personal Lesson in Code Chaos](#a-personal-lesson-in-code-chaos)
   - [Why a Good Folder Structure Matters](#why-a-good-folder-structure-matters)
   - [The Basic Folder Structure for Beginners](#the-basic-folder-structure-for-beginners)
     - [**Overview of the Structure**](#overview-of-the-structure)
     - [Step-by-Step Setup:](#step-by-step-setup)
+    - [Breaking Down the Folders:](#breaking-down-the-folders)
+      - [controllers/](#controllers)
+      - [models/](#models)
+      - [routes/](#routes)
+      - [middlewares/](#middlewares)
+      - [utils/](#utils)
+      - [config/](#config)
+      - [server.js](#serverjs)
+  - [Advanced Folder Structure for Scalability](#advanced-folder-structure-for-scalability)
+    - [Breakdown of Additional Folders](#breakdown-of-additional-folders)
+      - [services/](#services)
+      - [tests/](#tests)
+      - [public/](#public)
+      - [app.js](#appjs)
+    - [Why This Structure Works for Scalability](#why-this-structure-works-for-scalability)
   - [Best Practices for Organizing Your Code](#best-practices-for-organizing-your-code)
   - [Conclusion](#conclusion)
   - [Wrap-Up and Feedback 💬](#wrap-up-and-feedback-)
   - [Stay Connected 🌐](#stay-connected-)
 
----
 
 ## Introduction  
 
@@ -31,15 +44,6 @@ Organizing your codebase is one of the most important yet overlooked aspects of 
 
 In this guide, we’ll simplify the process of structuring your Node.js backend. Starting with a beginner-friendly setup, we’ll explore the purpose of each folder, provide practical examples, and share best practices. By the end, you’ll have a clear roadmap to keep your projects clean, maintainable, and ready to grow.  
 
----
-
-## A Personal Lesson in Code Chaos
-
-When I worked on my first paid backend project, I underestimated the importance of organizing my codebase. I tried to keep my code DRY (Don’t Repeat Yourself), but with no clear structure, I ended up duplicating code across files. Debugging was a nightmare, and scaling the project seemed impossible.  
-
-Thankfully, my next project was much smoother because I took the time to learn how to structure my code properly. With a clear folder organization, my code was easier to manage, and collaboration became effortless. Here’s how you can avoid my mistakes and set your project up for success.  
-
----
 
 ## Why a Good Folder Structure Matters  
 A good folder structure is like a well-organized toolbox. It makes your life easier and ensures your project can:
@@ -64,8 +68,8 @@ project/
 ├── server.js
 ```
 ### Step-by-Step Setup:
-1. Initialize Your Project: <br/>
-Run the following commands in your terminal:
+**Initialize Your Project:**
+<br>Run the following commands in your terminal:
 
 ```bash
 mkdir my-project
@@ -75,7 +79,7 @@ npm install express
 
 ```
 
-2. **Create Your Folders:** <br/>
+**Create Your Folders:** <br/>
 Use these commands to set up the structure:
 
 ```bash
@@ -83,22 +87,16 @@ mkdir controllers models routes middlewares utils config
 touch server.js
 ```
 
-3. **Breaking Down the Folders:**
+### Breaking Down the Folders:
 
-
-
-
-
-1. `controllers/`
-
-
-**What it is:**  <br>
+#### controllers/
+What it is: <br>
 The "brain" of your application. Controllers contain the logic that handles incoming requests and decides what data to send back to the client.
 
 When to use it:
 Every time a user sends a request (e.g., via an API call), the controller processes the request, interacts with the database if needed, and sends back the appropriate response.
 
-Example:
+**Example:** <br>
 Let’s say you have a user who wants to fetch a list of all registered users. The controller will:
 
 1. Receive the request.
@@ -133,21 +131,18 @@ exports.createUser = async (req, res) => {
 };
 ```
 
-2. models/
+#### models/
 
-What it is:
-
+What it is:  <br>
 The "blueprint" of your data. Models define the structure of your data and how it interacts with the database.
 
-When to use it:
-
+When to use it:<br>
 Whenever you need to save, retrieve, or manipulate data in your database, you use models. They enforce consistency in the data format (e.g., all users must have a name and email).
 
-Example:
-
+**Example:** <br>
 If you’re working with a MongoDB database, you might use Mongoose to define a model for users. This ensures that every user document has a consistent structure.
 
-Code Example:
+**Code Example:**
 
 ```js
 // models/User.js
@@ -166,7 +161,7 @@ module.exports = mongoose.model('User', userSchema);
 ```
 
 
-3. routes/
+#### routes/
 What it is: <br/>
 The "map" of your application. Routes connect specific URLs (or endpoints) to the appropriate controller functions.
 
@@ -191,7 +186,7 @@ router.post('/', createUser);  // POST /users → create a new user
 module.exports = router;
 ```
 
-4. `middlewares/`
+#### middlewares/
    
 What it is: <br>
 The "gatekeeper" of your application. Middleware functions run before your controllers, allowing you to handle tasks like authentication, logging, or input validation.
@@ -202,7 +197,7 @@ Whenever you need to process a request before it reaches the controller. For exa
 **Example:** <br>
 Let’s say you want to log every request your server receives. A middleware can handle this.
 
-Code Example:
+**Code Example:**
 
 ```js
 // middlewares/logger.js
@@ -212,7 +207,7 @@ module.exports = (req, res, next) => {
 };
 ```
 
-1. `utils/`
+#### utils/
    
 What it is: <br>
 The "toolbox" of your application. Utility files store helper functions or modules that can be reused across your project.
@@ -223,7 +218,7 @@ Any time you have code that doesn’t belong in a controller, model, or middlewa
 **Example:**
 Imagine you need a reusable function to format timestamps.
 
-Code Example:
+**Code Example:**
 
 ```js
 // utils/dateFormatter.js
@@ -232,20 +227,18 @@ exports.formatDate = (date) => {
 };
 ```
 
-![picture 28](https://cdn.jsdelivr.net/gh/jovick-coder/jovick-blog@main/A%20Beginner's%20Guide%20to%20Node.js%20Folder%20Structure%20Simplify%20Your%20Backend/images/1736638673489_12_01_2025.png)  
 
-
-1. config/
-What it is:
+#### config/
+What it is: <br>
 The "control center" of your application. This folder stores configuration files, such as database connection settings, API keys, or environment variables.
 
-When to use it:
+When to use it:<br>
 Any time you need to configure your app for different environments (e.g., development, testing, production).
 
-Example:
+**Example:** <br>
 Here’s a file to handle your MongoDB connection:
 
-Code Example:
+**Code Example:**
 
 ```js
 // config/db.js
@@ -264,17 +257,17 @@ const connectDB = async () => {
 module.exports = connectDB;
 ```
 
-7. server.js
-What it is:
+#### server.js
+What it is: <br>
 The "heart" of your application. This file initializes the Express server, connects to the database, and sets up the middleware and routes.
 
-When to use it:
+When to use it:<br>
 Every project needs an entry point, and this is it.
 
-Example:
+**Example:**
 Here’s a simple example of a server.js file:
 
-Code Example:
+**Code Example:**
 
 ```js
 // server.js
@@ -300,12 +293,147 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 ```
 
+## Advanced Folder Structure for Scalability
+As your application grows in complexity, a more organized and scalable folder structure becomes necessary. Here's a detailed breakdown of the advanced folder structure:
+
+```plaintext
+project/
+├── src/
+│   ├── controllers/
+│   ├── models/
+│   ├── routes/
+│   ├── middlewares/
+│   ├── utils/
+│   ├── config/
+│   ├── services/
+│   ├── tests/
+│   ├── app.js
+├── public/
+├── package.json
+├── README.md
+
+```
+
+### Breakdown of Additional Folders
+
+#### services/ 
+**Business Logic Layer** <br>
+The `services` folder contains reusable business logic that doesn't belong in the controller. This helps keep your controllers clean and focused solely on handling HTTP requests and responses.
+
+**Example Use Case:**
+
+You need to calculate discounts for an e-commerce application. Instead of writing this logic in the controller, you create a `discountService.js` file.
+
+**Code Example:**
+```js
+// services/discountService.js
+exports.calculateDiscount = (price, discountRate) => {
+    return price - (price * discountRate);
+};
+
+```
+Then, your controller can simply call this function:
+
+```js
+// controllers/productController.js
+const { calculateDiscount } = require('../services/discountService');
+
+exports.getProduct = async (req, res) => {
+    const product = await Product.findById(req.params.id);
+    const discountedPrice = calculateDiscount(product.price, 0.1);
+    res.json({ product, discountedPrice });
+};
+```
+
+#### tests/
+**Testing Code**
+The tests folder is essential for maintaining code quality as your app grows. It contains unit tests, integration tests, and sometimes end-to-end (E2E) tests.
+
+**Best Practices:** <br>
+- Use a testing library like Jest, Mocha, or Supertest.
+- Organize tests to mirror your `src` folder structure. For example, a test for `controllers/userController.js` might be in `tests/controllers/userController.test.js`.
+
+**Code Example:**
+
+```js
+// tests/controllers/userController.test.js
+const request = require('supertest');
+const app = require('../../src/app');
+
+describe('GET /users', () => {
+    it('should return a list of users', async () => {
+        const response = await request(app).get('/users');
+        expect(response.status).toBe(200);
+        expect(response.body).toBeInstanceOf(Array);
+    });
+});
+```
+
+#### public/
+**Static Files**<br>
+The `public` folder is where you store static assets like images, CSS, JavaScript, or fonts. These files are served directly to the client without being processed by your backend.
+
+**Use Case:** <br>
+Serving a logo image for your application.
+Hosting frontend files if you’re building a full-stack app with client-side rendering.
+
+**Example:**<br>
+An image stored in `public/images/logo.png` can be accessed via `http://yourdomain.com/images/logo.png`.
+
+**Code Configuration:** <br>
+To serve static files, configure Express like this:
+
+```js
+const express = require('express');
+const app = express();
+
+app.use(express.static('public')); // Serves files in the 'public' directory
+```
+
+#### app.js
+**Application Setup**<br>
+The `app.js` file initializes the core of your application. It’s typically used to:
+
+- Set up middleware.
+- Register routes.
+- Export the Express app for server configuration or testing.
+
+**Code Example:**
+
+```js
+// src/app.js
+const express = require('express');
+const userRoutes = require('./routes/userRoutes');
+const loggerMiddleware = require('./middlewares/logger');
+
+const app = express();
+app.use(express.json());
+app.use(loggerMiddleware);
+app.use('/users', userRoutes);
+
+module.exports = app; // Export for testing or server.js
+```
+
+### Why This Structure Works for Scalability
+1. **Separation of Concerns:** 
+Each folder has a specific responsibility, making the codebase easier to understand and maintain.
+
+2. **Reusability:**
+The services folder keeps your business logic reusable and avoids duplication.
+
+3. **Testability:**
+A clear structure ensures every part of your app is easy to test, leading to fewer bugs.
+
+4. **Ease of Collaboration:** Teams can work on different parts of the app without stepping on each other’s toes.
+
+
 ## Best Practices for Organizing Your Code
-1. Start Small, Scale Later: Begin with a simple structure and refactor as your app grows.
-2. Stick to Conventions: Use clear and consistent naming.
-3. Use Environment Variables: Keep sensitive data like API keys out of your codebase.
-4. Document Everything: Include a README with explanations for your setup.
-5. Test Regularly: Add tests to catch bugs early.
+1. **Start Small, Scale Later:** Begin with a simple structure and refactor as your app grows.
+2. **Stick to Conventions:** Use clear and consistent naming.
+3. **Stay DRY (Don’t Repeat Yourself):** Extract repetitive logic into reusable utilities.
+4. **Use Environment Variables:** Keep sensitive data like API keys out of your codebase.
+5. **Document Everything**: Include a README with explanations for your setup.
+6. **Test Regularly:** Add tests to catch bugs early.
 
 ## Conclusion
 Organizing your Node.js backend may seem daunting at first, but a good folder structure will save you time, reduce bugs, and make your code easy to maintain. Whether you’re starting small or building a large-scale application, following these guidelines will set you on the path to success.
@@ -322,9 +450,9 @@ Your feedback matters! Share your thoughts in the comments section—whether it'
 
 ## Stay Connected 🌐
 
-This is just the beginning of my blogging journey, and I'd love to connect with you! Let's share ideas, grow, and learn together.
+I’ve been sharing my journey and insights for a while, and I’d love to connect with you! Let’s continue exchanging ideas, learning from each other, and growing together.
 
-**Follow me and let’s stay in touch:**
+**Follow me on my socials and let’s stay in touch:**
 
 - [Twitter](https://twitter.com/victorjosiah19)
 - [LinkedIn](https://www.linkedin.com/in/josiah-victor/)
